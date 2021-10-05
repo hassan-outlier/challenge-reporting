@@ -44,3 +44,7 @@ How to attempt this challenge:
 6) Push your solution to your repo
 
 You must follow these steps for your solution to be accepted -- forks or other methods will not be considered.
+
+## Feedback
+
+The challenge is related to our business logic and the instructions assure that candidates have to submit high quality code. We can also add to the instructions that candidates should push each change in a separate commit to get used to our workflow.
