@@ -30,9 +30,20 @@ async function getStudent (req, res, next) {
 }
 
 async function getStudentGradesReport (req, res, next) {
-  throw new Error('This method has not been implemented yet.')
+  try {
+    const { id } = req.params
+    const data = await Student.getStudentGrades(id)
+    return res.json({ success: true, data })
+  } catch (error) {
+    throw new Error('Error: ', error.message)
+  }
 }
 
 async function getCourseGradesReport (req, res, next) {
-  throw new Error('This method has not been implemented yet.')
+  try {
+    const data = Student.getCourseGradesStats()
+    return res.json({ success: true, data })
+  } catch (error) {
+    throw new Error('Error: ', error.message)
+  }
 }

@@ -51,6 +51,62 @@ tape('get student by ID', async function (t) {
   }
 })
 
+tape('get student grades', async function (t) {
+  const studentId = 1
+  const url = `${endpoint}/student/${studentId}/grades`
+  try {
+    const { data } = await jsonist.get(url)
+    const expectedData = [
+      { id: 1, course: 'Calculus', grade: 50 },
+      { id: 1, course: 'Microeconomics', grade: 43 },
+      { id: 1, course: 'Statistics', grade: 50 },
+      { id: 1, course: 'Astronomy', grade: 63 }
+    ]
+    t.deepEqual(data.data, expectedData, 'should get student by ID')
+    t.end()
+  } catch (e) {
+    t.error(e)
+  }
+})
+
+tape('get course statistics', async function (t) {
+  const url = `${endpoint}/course/all/grades`
+  try {
+    const { data } = await jsonist.get(url)
+    const expectedData = {
+      Calculus: {
+        highestGrade: 100,
+        lowestGrade: 0,
+        averageGrade: 50.09270747689165
+      },
+      Microeconomics: {
+        highestGrade: 100,
+        lowestGrade: 0,
+        averageGrade: 49.81138092966023
+      },
+      Statistics: {
+        highestGrade: 100,
+        lowestGrade: 0,
+        averageGrade: 50.017376820961566
+      },
+      Astronomy: {
+        highestGrade: 100,
+        lowestGrade: 0,
+        averageGrade: 50.03889013536759
+      },
+      Philosophy: {
+        highestGrade: 100,
+        lowestGrade: 0,
+        averageGrade: 50.01606355689488
+      }
+    }
+    t.deepEqual(data.data, expectedData, 'should get student by ID')
+    t.end()
+  } catch (e) {
+    t.error(e)
+  }
+})
+
 tape('cleanup', function (t) {
   server.closeDB()
   server.close()
